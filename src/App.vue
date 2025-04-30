@@ -1,8 +1,16 @@
 <template>
   <main>
     <el-row>
-      <!-- <el-alert type="info" description="Для указания нескольких" show-icon /> -->
       <el-form :inline="false" :model="form" class="form" label-position="top">
+        <el-row>
+          <el-alert
+            type="info"
+            description="Для указания нескольких меток для одной пары логин/пароль используйте разделитель ;"
+            show-icon
+            :closable="false"
+            class="alert"
+          />
+        </el-row>
         <el-row :gutter="10" class="form-item">
           <el-col :span="4">
             <el-form-item label="Метки">
@@ -94,4 +102,8 @@ main {
 .form .el-select {
   --el-select-width: 100px;
 } */
+
+.alert {
+  margin-bottom: 20px;
+}
 </style>
