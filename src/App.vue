@@ -1,6 +1,6 @@
 <template>
   <main>
-    <el-row>
+    <el-row class="form-wrapper">
       <el-form :model="records" class="form" label-position="top">
         <el-row>
           <el-form-item class="form__header" label="Учетные записи" label-position="left">
@@ -15,6 +15,20 @@
             :closable="false"
             class="alert"
           />
+        </el-row>
+        <el-row :gutter="5">
+          <el-col :span="6">
+            <el-form-item label="Метки"> </el-form-item>
+          </el-col>
+          <el-col :span="5">
+            <el-form-item label="Тип записи"> </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="Логин"> </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="Пароль"> </el-form-item>
+          </el-col>
         </el-row>
 
         <form-record-row
@@ -73,6 +87,15 @@ main {
 .form {
   background-color: rgba(0, 0, 0, 0.136);
   padding: 1.5rem;
+  width: 100%;
+}
+
+.form-wrapper {
+  width: 80%;
+}
+
+.el-form-item {
+  margin-bottom: 0px;
 }
 
 .alert {
@@ -81,5 +104,6 @@ main {
 
 .form__header {
   --el-form-label-font-size: 24px;
+  margin-bottom: 24px;
 }
 </style>
