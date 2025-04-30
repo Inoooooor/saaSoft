@@ -3,6 +3,11 @@
     <el-row>
       <el-form :inline="false" :model="form" class="form" label-position="top">
         <el-row>
+          <el-form-item class="form__header" label="Учетные записи" label-position="left">
+            <el-button plain :icon="Plus" type="primary"> </el-button>
+          </el-form-item>
+        </el-row>
+        <el-row>
           <el-alert
             type="info"
             description="Для указания нескольких меток для одной пары логин/пароль используйте разделитель ;"
@@ -50,7 +55,7 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { Delete } from '@element-plus/icons-vue'
+import { Delete, Plus } from '@element-plus/icons-vue'
 
 interface Form {
   marks: string
@@ -105,5 +110,9 @@ main {
 
 .alert {
   margin-bottom: 20px;
+}
+
+.form__header {
+  --el-form-label-font-size: 24px;
 }
 </style>
