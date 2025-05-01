@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { Delete } from '@element-plus/icons-vue'
+import { RecordTypes, type FormRecord } from '@/types'
 
 defineEmits(['deleteRecord'])
+defineProps<{ records: FormRecord[] }>()
 
 const marks = defineModel<string>('marks')
 const recordType = defineModel<string>('recordType')
 const password = defineModel<string>('password')
 const login = defineModel<string>('login')
+
+const isLocal = computed<boolean>(() => recordType.value === RecordTypes.LOCAL)
 </script>
 <template>
   <el-row :gutter="5" class="form-item" justify="space-between">
@@ -30,16 +35,27 @@ const login = defineModel<string>('login')
         </el-select>
       </el-form-item>
     </el-col>
-    <el-col :span="6">
-      <el-form-item>
-        <el-input v-model="login" placeholder="Значение"></el-input>
-      </el-form-item>
-    </el-col>
-    <el-col :span="6">
-      <el-form-item>
-        <el-input v-model="password" show-password></el-input>
-      </el-form-item>
-    </el-col>
+
+    <template v-if="isLocal">
+      <el-col :span="6">
+        <el-form-item>
+          <el-input v-model="login" placeholder="Значение"></el-input>
+        </el-form-item>
+      </el-col>
+      <el-col :span="6">
+        <el-form-item>
+          <el-input v-model="password" show-password></el-input>
+        </el-form-item>
+      </el-col>
+    </template>
+    <template v-else>
+      <el-col :span="12">
+        <el-form-item>
+          <el-input v-model="login" placeholder="Значение"></el-input>
+        </el-form-item>
+      </el-col>
+    </template>
+
     <el-col :span="1">
       <el-form-item>
         <el-button
@@ -67,6 +83,6 @@ const login = defineModel<string>('login')
 }
 
 .form-item {
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
 </style>

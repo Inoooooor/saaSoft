@@ -1,7 +1,8 @@
 <template>
+  {{ records }}
   <main>
     <el-row class="form-wrapper">
-      <el-form :model="records" class="form" label-position="top">
+      <el-form :model="records" class="form" label-position="top" ref="formRef">
         <el-row>
           <el-form-item class="form__header" label="Учетные записи" label-position="left">
             <el-button plain :icon="Plus" type="primary" @click="addRecord"> </el-button>
@@ -38,6 +39,7 @@
           v-model:login="record.login"
           v-model:password="record.password"
           :key="record.key"
+          :records="records"
           @delete-record="deleteRecord(record)"
         />
       </el-form>
@@ -48,13 +50,13 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import FormRecordRow from './components/FormRecord.vue'
-import { type FormRecord } from './types'
+import { type FormRecord, RecordTypes } from './types'
 import { Plus } from '@element-plus/icons-vue'
 
 const records = reactive<FormRecord[]>([
   {
     marks: '',
-    recordType: '',
+    recordType: RecordTypes.LOCAL,
     login: '',
     password: '',
     key: Date.now(),
@@ -62,7 +64,13 @@ const records = reactive<FormRecord[]>([
 ])
 
 const addRecord = (): void => {
-  records.push({ marks: '', recordType: '', login: '', password: '', key: Date.now() })
+  records.push({
+    marks: '',
+    recordType: RecordTypes.LOCAL,
+    login: '',
+    password: '',
+    key: Date.now(),
+  })
 }
 
 const deleteRecord = (record: FormRecord): void => {
